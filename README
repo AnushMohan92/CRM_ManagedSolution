@@ -17,7 +17,7 @@ A. How to import the soltuon and some prerequisites:
 
 3. Assign the security role "CEO-Business Manager" to whomever user wants to apply a property hold on the account entity.
 
-4. If the solution is being imported in the new environment plugin trace logs should be enabled.
+4. If the solution is being imported in the new environment plugin trace logs can be enabled for testing purpose.
 
 
 B. How to run and test?
@@ -26,20 +26,20 @@ B. How to run and test?
 2. For account the default form "Account for Interactive experiece" comes with the above app has been considered.
 3. Field with label "Customer" has been considered as the lookup to the account entity on case.
 4. Make sure atleast 1 case record is associated with an account record.
-5. A plugin will be triggered on resolving or canceling a case to add a retention policy date on the account which is 3 years from now.
+5. A plugin will be triggered on resolving or canceling a case to add a retention policy date on the account which is 3 years from case resolution.
 6. Upon updation of the retention date field on the account, an OOB workflow will be triggered, which will timeout until the retention policy date is met.
 7. Upon successful resolution of a case pertaining to an account, retention policy date will be updated accordingly from previous value.
-   Fields retention policy date and legal hold property
+   Fields retention policy date and legal hold property are placed on Account information section in summary tab.
 8. If the actual date has arrived the OOB will call a custom workflow to delete the related rcords of an account 
 	and pass the property on legal hold property as an input parameter. 
 9. If the property on hold is applied the deletion doesnt happen and the control returns and workflow successfully stopped.
 10. If the property on hold is not applied the custom workflow will retieve all the records related to account i.e.,
-	cases, contacts, Activities, Notes with attachments and the accoount entity itself.
+	cases, contacts, Activities, Notes with attachments and the account entity itself will be deleted.
 11. Some account records are associated with entitlement records also, so entitlement also being deleted as part of this job.
 
 12. A java script webresource will trigger on load event of an accout, to gather the logged in user security roles and only show "legal hold property" 
     field if the user has "CEO-Business Manager" security role assigned if not its hidden.
-13. On change of "legal hold property" field a warning notification and promt will be show to enter the reason for the hold.
+13. On change of "legal hold property" field a warning notification and promt will be shown to enter the reason for the hold.
 14. If the user inputs the reason text in the prompt, a new Note entity will be created and associated with the account with the reason copied 
     in the note body.
 15. If the user not wish to provide the reason the field will not turn to yes.
@@ -55,19 +55,16 @@ NOTE : For this reason field is not being made read-only on the account.
 
 URLs to source code in Git hub
 
-1. CRM Managed solution to import
-
+1. CRM Managed solution to import (Along with ReadMe file)
    https://github.com/AnushMohan92/CRM_ManagedSolution
 
-1. Plugin code
-
+2. Plugin code
    https://github.com/AnushMohan92/GdprRetentionPolicy
 	
-2. Custom workflow
-   
+3. Custom workflow
    https://github.com/AnushMohan92/DeleteAccountRelatedRecords
    
-3. Java Script
-
+4. Java Script
    https://github.com/AnushMohan92/accountJS
-  
+   
+
